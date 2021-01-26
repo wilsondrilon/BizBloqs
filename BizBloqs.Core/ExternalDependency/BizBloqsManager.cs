@@ -7,7 +7,7 @@ using System.Linq;
 namespace BizBloqs.Core.ExternalDependency
 {
 
-    public class BizBloqsManager
+    public class BizBloqsManager : IBizBloqsManager
     {
         /// <summary>
         /// Process data will loop through the data and count all the vowels (a,e,i,o,u) in the text.  
@@ -32,11 +32,11 @@ namespace BizBloqs.Core.ExternalDependency
 
             foreach (var data in dataList)
             {
-                data.Text = data.Text.ToUpper();
+                data.Text = data.Text.ToLower();
                 char[] vowels = { 'a', 'e', 'i', 'o', 'u' };
 
                 // Loop through all the text supplied and count the number of vowels (a,e,i,o,u)
-                for (var i = 1; i < data.Text.Length + 1; i = i + 1)
+                for (var i = 1; i < data.Text.Length; i++)
                 {
                     //check if character exists as vowel
                     if (vowels.Any(data.Text[i].ToString().Contains))
@@ -44,7 +44,6 @@ namespace BizBloqs.Core.ExternalDependency
                         count++;
                     }
                 }
-                break;
             }
 
             // Return the count of all the vowels

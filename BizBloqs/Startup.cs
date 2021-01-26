@@ -5,6 +5,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
+using BizBloqs.Core;
+using AutoMapper;
+using BizBloqs.Core._Helper;
+using System;
+using BizBloqs.Core.ExternalDependency;
 
 namespace BizBloqs
 {
@@ -27,11 +32,18 @@ namespace BizBloqs
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            services.AddDbContextPool<BizBloqsContext>(opts => opts.UseSqlServer("Server=.\\SQLEXPRESS;Port=3306;database=BizBloqs;Uid=root;Pwd=m@st3rk3y;", builder =>
+            services.AddDbContextPool<BizBloqsContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:BizBloqConString"], builder =>
             {
                 //builder.EnableRetryOnFailure();
             }));
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddScoped<IBizBloqsContext, BizBloqsContext>();
+            services.AddScoped<IStoreTextData, StoreTextData>();
+            services.AddScoped<IStoreTextCore, StoreTextCore>();
+            services.AddScoped<IGeneralResponse, GeneralResponse>();
+            services.AddScoped<IBizBloqsContext, BizBloqsContext>();
+            services.AddScoped<IBizBloqsManager, BizBloqsManager>();
 
             services.AddControllers();
         }

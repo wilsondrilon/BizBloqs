@@ -29,10 +29,18 @@ namespace BizBloqs.Core
 
         public async Task<dynamic> Insert(StoreTextCoreModel data)
         {
+
+
+            if (CheckIfHasValue.Validate(data.data))
+            {
+                return _generalResponse.Response(null, Convert.ToInt32(HttpStatusCode.BadRequest), "Provided data is invalid, Value must not be null, empty or whitespace", true);
+            }
+
             if (!InputLengthValidator.IsValid(data.data))
             {
                 return _generalResponse.Response(null, Convert.ToInt32(HttpStatusCode.BadRequest), "String length is invalid!", true);
             }
+
 
             await _data.Insert(_mapper.Map<Data.Entity.StoredText>(data));
             return _generalResponse.Response(null, Convert.ToInt32(HttpStatusCode.OK), "Data Inserted!", true);

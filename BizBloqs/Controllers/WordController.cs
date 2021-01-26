@@ -25,6 +25,10 @@ namespace BizBloqs.Controllers
         public async Task<IActionResult> Insert(StoreTextCoreModel data)
         {
            var response = await _storeTextCore.Insert(data);
+            if(response.statusCode != 200)
+            {
+                return BadRequest(response);
+            }
             return Ok(response);
         } 
 
@@ -33,6 +37,10 @@ namespace BizBloqs.Controllers
         public async Task<IActionResult> GetVowels()
         {
             var response = await _storeTextCore.GetVowels();
+            if (response.statusCode != 200)
+            {
+                return BadRequest(response);
+            }
             return Ok(response);
         }
     }

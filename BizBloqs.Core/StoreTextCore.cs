@@ -27,18 +27,18 @@ namespace BizBloqs.Core
             _bizBloqsManager = bizBloqsManager;
         }
 
-        public async Task<dynamic> Insert(StoreTextCoreModel data)
+        public async Task<GeneralModel> Insert(StoreTextCoreModel data)
         {
 
 
             if (CheckIfHasValue.Validate(data.data))
             {
-                return _generalResponse.Response(null, Convert.ToInt32(HttpStatusCode.BadRequest), "Provided data is invalid, Value must not be null, empty or whitespace", true);
+                return _generalResponse.Response(null, Convert.ToInt32(HttpStatusCode.BadRequest), "Provided data is invalid, Value must not be null, empty or whitespace", false);
             }
 
             if (!InputLengthValidator.IsValid(data.data))
             {
-                return _generalResponse.Response(null, Convert.ToInt32(HttpStatusCode.BadRequest), "String length is invalid!", true);
+                return _generalResponse.Response(null, Convert.ToInt32(HttpStatusCode.BadRequest), "String length is invalid!", false);
             }
 
 
@@ -46,7 +46,7 @@ namespace BizBloqs.Core
             return _generalResponse.Response(null, Convert.ToInt32(HttpStatusCode.OK), "Data Inserted!", true);
         }
 
-        public async Task<dynamic> GetVowels()
+        public async Task<GeneralModel> GetVowels()
         {
             var dataList = await _data.GetEverySecondRow();
             var listDataModel = new List<DataModel>();

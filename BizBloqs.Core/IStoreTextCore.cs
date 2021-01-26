@@ -1,11 +1,12 @@
-﻿using BizBloqs.Core.Models;
+﻿using BizBloqs.Core._Helper;
+using BizBloqs.Core.Models;
 using System.Threading.Tasks;
 
 namespace BizBloqs.Core
 {
     public interface IStoreTextCore
     {
-        Task<dynamic> Insert(StoreTextCoreModel data);
-        Task<dynamic> GetVowels();
+        Task<GeneralModel> Insert(StoreTextCoreModel data);
+        Task<GeneralModel> GetVowels();
     }
 }

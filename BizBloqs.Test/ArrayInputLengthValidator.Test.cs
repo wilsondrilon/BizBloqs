@@ -11,9 +11,10 @@ namespace BizBloqs.Test
         [Theory]
         [InlineData("BizBloqsIsHereWavingt")]
         [InlineData("BizBloqsIsH    ereWavingt")]
+        [InlineData("bolters                                                           ")]
         public void InvalidLength(string value)
         {
-            var result = Core._Validators.ArrayInputLengthValidator.IsValid(value);
+            var result = Core._Validators.InputLengthValidator.IsValid(value);
 
             Assert.False(result);
         }
@@ -23,7 +24,7 @@ namespace BizBloqs.Test
         [InlineData("  BizBloqs  ")]
         public void IsValidLength(string value)
         {
-            var result = Core._Validators.ArrayInputLengthValidator.IsValid(value);
+            var result = Core._Validators.InputLengthValidator.IsValid(value);
 
             Assert.True(result);
         }

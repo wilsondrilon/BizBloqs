@@ -2,7 +2,7 @@
 
 namespace BizBloqs.Core._Validators
 {
-    public static class ArrayInputLengthValidator
+    public static class InputLengthValidator
     {
         public static bool IsValid(string data)
         {

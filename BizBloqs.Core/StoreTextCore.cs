@@ -29,7 +29,7 @@ namespace BizBloqs.Core
 
         public async Task<dynamic> Insert(StoreTextCoreModel data)
         {
-            if (ArrayInputLengthValidator.IsValid(data.data))
+            if (!InputLengthValidator.IsValid(data.data))
             {
                 return _generalResponse.Response(null, Convert.ToInt32(HttpStatusCode.BadRequest), "String length is invalid!", true);
             }
